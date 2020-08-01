@@ -20,13 +20,24 @@ Route::group(array(), function()
   Route::get('/', function () {
       return response()->json(['message' => 'Produtos API', 'status' => 'Conectado']);;
   });
+
   Route::resource('produtos', 'ProdutosController');
+
   Route::post('adicionar-produtos', ['as' => 'adicionar-produtos', 'uses' => 'EstoqueController@adicionarProdutos']);
+
   Route::post('baixar-produtos ', ['as' => 'baixar-produtos', 'uses' => 'EstoqueController@baixarProdutos']);
+
   Route::get('relatorio-produtos-adicionados',
     [
       'as' => 'relatorio-produtos-adicionados',
       'uses' => 'RelatoriosController@adicionadosEstoque'
+    ]
+  );
+
+  Route::get('relatorio-produtos-removidos',
+    [
+      'as' => 'relatorio-produtos-removidos',
+      'uses' => 'RelatoriosController@removidosEstoque'
     ]
   );
 

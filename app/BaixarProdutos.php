@@ -10,4 +10,9 @@ class BaixarProdutos extends Model
   protected $guarded = ['id', 'created_at', 'update_at'];
   protected $table = 'baixa_estoque';
 
+  public function produtos()
+  {
+    return $this->belongsTo('App\Produtos', 'id_produto', 'id');
+  }
+
 }

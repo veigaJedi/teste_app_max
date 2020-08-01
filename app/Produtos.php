@@ -12,6 +12,11 @@ class Produtos extends Model
 
   public function estoque()
   {
-      return $this->belongsTo('App\Estoque','id_produto','id'); 
+      return $this->hasMany('App\Estoque','id_produto','id');
+  }
+
+  public function baixas()
+  {
+      return $this->hasMany('App\BaixarProdutos','id_produto','id');
   }
 }
