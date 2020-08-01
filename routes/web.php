@@ -34,5 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::delete('produtos/destroy/{id}', ['as' => 'produtos.destroy', 'uses' => 'ProdutosController@destroy']);
 
+  Route::get('adicionar-produto', ['as' => 'adicionar-produto.create', 'uses' => 'EstoqueProdutosController@create']);
+
+  Route::post('adicionar-produtos', ['as' => 'adicionar-produtos', 'uses' => 'EstoqueProdutosController@adicionarProdutos']);
 
 });

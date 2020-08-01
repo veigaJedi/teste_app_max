@@ -8,6 +8,8 @@
       <title>{{ config('app.name', 'App Max') }}</title>
       <!-- Scripts -->
       <script src="{{ asset('js/app.js') }}" defer></script>
+      <script src="{{ asset('mask/jquery.mask.js') }}" defer></script>
+      <script src="{{ asset('mask/mask.js') }}" defer></script>
       <!-- Fonts -->
       <link rel="dns-prefetch" href="//fonts.gstatic.com">
       <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -42,7 +44,7 @@
                         {{ __('Estoque') }}<span class="caret"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownEstoque">
-                           <a class="dropdown-item" href="">
+                           <a class="dropdown-item" href="{{ route('adicionar-produto.create')}}">
                            {{ __('Adicionar Produtos Estoque') }}
                            </a>
                            <a class="dropdown-item" href="">

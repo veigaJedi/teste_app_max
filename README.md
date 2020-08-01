@@ -1,5 +1,9 @@
 Bem vindo ao estoque de produtos app max
 
+requerimentos
+  PHP 7.4.3 - 
+
+
 Rodar comandos
 
 composer install
