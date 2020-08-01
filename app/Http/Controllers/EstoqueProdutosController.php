@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Estoque;
 use App\Produtos;
+use App\BaixarProdutos;
+use DB;
 
 class EstoqueProdutosController extends Controller
 {
@@ -46,6 +48,37 @@ class EstoqueProdutosController extends Controller
        $estoque->save();
 
        return redirect()->route('adicionar-produto.create')->withStatus(__('Cadastrado com sucesso.'));
+     }
+
+     public function createBaixa()
+     {
+       $produtos = Produtos::orderBy('updated_at','asc')->get();
+       return view('estoque.baixa',['produtos' => $produtos]);
+     }
+
+     public function baixarProdutos(Request $request)
+     {
+       $produtoCountQuant = Estoque::select(DB::raw('SUM(quantidade) as quantidade_total'))
+         ->where('id_produto','=',$request->produto)
+         ->groupBy('id_produto','quantidade')
+         ->first();
+
+       if(!$produtoCountQuant){
+         return redirect()->route('baixa-produto')->withStatus(__('Produto nao disponivel no estoque'));
+       }
+
+       if($request->quantidade > $produtoCountQuant->quantidade_total)
+       {
+         return redirect()->route('baixa-produto')->withStatus(__('Quantidade solicidade maior que disponivel no estoque.'));
+       }
+
+       $baixaProduto = new BaixarProdutos();
+       $baixaProduto->id_produto  = $request->produto;
+       $baixaProduto->cliente     = $request->cliente;
+       $baixaProduto->quantidade  = $request->quantidade;
+       $baixaProduto->save();
+
+       return redirect()->route('baixa-produto')->withStatus(__('Baixa solicitada com sucesso'));
      }
 
 

@@ -4,21 +4,26 @@
    <div class="row justify-content-center">
       <div class="col-md-8">
          <div class="card">
-            <div class="card-header">{{ __('Editar Produto') }}</div>
+            <div class="card-header">{{ __('Baixar Produto no Estoque') }}</div>
             <div class="card-body">
                @if (session('status'))
-               <div class="alert alert-danger" role="alert">
+               <div class="alert alert-success" role="alert">
                   {{ session('status') }}
                </div>
                @endif
             </div>
             <div class="card-body">
-               <form method="post" action="{{ route('produtos.update', $produto->id) }}">
+               <form method="POST" action="{{ route('baixar-produtos') }}">
                   @csrf
                   <div class="form-group row">
-                     <label for="nome" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
+                     <label for="nome" class="col-md-4 col-form-label text-md-right">{{ __('Produto') }}</label>
                      <div class="col-md-6">
-                        <input id="nome" type="text" class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}" name="nome" value="{{ old('nome', $produto->nome) }}" required autofocus>
+                       <select  name="produto" class="form-control{{ $errors->has('produto') ? ' is-invalid' : '' }}" required>
+                         <option value="">Selecione o produto</option>
+                         @foreach($produtos as $value)
+                            <option value="{{ $value->id }}">{{ $value->nome }}</option>
+                          @endforeach
+                       </select>
                         @if ($errors->has('nome'))
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('nome') }}</strong>
@@ -27,39 +32,23 @@
                      </div>
                   </div>
                   <div class="form-group row">
-                     <label for="sku" class="col-md-4 col-form-label text-md-right">{{ __('SKU') }}</label>
+                     <label for="cliente" class="col-md-4 col-form-label text-md-right">{{ __('Cliente') }}</label>
                      <div class="col-md-6">
-                        <input id="sku" type="text" class="form-control{{ $errors->has('sku') ? ' is-invalid' : '' }}" name="sku" value="{{ old('sku', $produto->sku) }}" required autofocus>
-                        @if ($errors->has('sku'))
+                        <input id="cliente" type="text" class="form-control{{ $errors->has('cliente') ? ' is-invalid' : '' }}" name="cliente" value="{{ old('cliente') }}" required autofocus>
+                        @if ($errors->has('cliente'))
                         <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('sku') }}</strong>
+                        <strong>{{ $errors->first('cliente') }}</strong>
                         </span>
                         @endif
                      </div>
                   </div>
                   <div class="form-group row">
-                     <label for="descricao" class="col-md-4 col-form-label text-md-right">{{ __('Descrição') }}</label>
+                     <label for="quantidade" class="col-md-4 col-form-label text-md-right">{{ __('Quantidade') }}</label>
                      <div class="col-md-6">
-                        <textarea required autofocus name="descricao">
-                        {{ $produto->descricao }}
-                        </textarea>
-                        @if ($errors->has('descricao'))
+                        <input id="quantidade" type="text" class="form-control{{ $errors->has('quantidade') ? ' is-invalid' : '' }}" name="quantidade" value="{{ old('quantidade') }}" required autofocus>
+                        @if ($errors->has('quantidade'))
                         <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('descricao') }}</strong>
-                        </span>
-                        @endif
-                     </div>
-                  </div>
-                  <div class="form-group row">
-                     <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
-                     <div class="col-md-6">
-                        <select  name="status" class="form-control{{ $errors->has('texto') ? ' is-invalid' : '' }}" value="{{ old('texto') }}" required>
-                        <option value="A" {{ ($produto->status == 'A' ? "selected":"") }}>Ativo</option>
-                        <option value="D" {{ ($produto->status == 'D' ? "selected":"") }}>Desativado</option>
-                        </select>
-                        @if ($errors->has('status'))
-                        <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('status') }}</strong>
+                        <strong>{{ $errors->first('quantidade') }}</strong>
                         </span>
                         @endif
                      </div>

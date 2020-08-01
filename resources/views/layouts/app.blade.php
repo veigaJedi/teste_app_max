@@ -47,7 +47,7 @@
                            <a class="dropdown-item" href="{{ route('adicionar-produto.create')}}">
                            {{ __('Adicionar Produtos Estoque') }}
                            </a>
-                           <a class="dropdown-item" href="">
+                           <a class="dropdown-item" href="{{ route('baixa-produto')}}">
                            {{ __('Baixar Produtos Estoque') }}
                            </a>
                         </div>
