@@ -53,9 +53,19 @@
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/produtos') }}">
-                        {{ __('Relatorios') }}
+                       <li class="nav-item dropdown">
+                          <a id="navbarDropdownRel" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          {{ __('Relatorios') }}<span class="caret"></span>
+                          </a>
                         </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownRel">
+                           <a class="dropdown-item" href="{{ route('rel-produtos-adicionados')}}">
+                           {{ __('Adicionados ao Estoque') }}
+                           </a>
+                           <a class="dropdown-item" href="{{ route('baixa-produto')}}">
+                           {{ __('Removidos od Estoque') }}
+                           </a>
+                        </div>
                      </li>
                      @endguest
                   </ul>
