@@ -12,3 +12,27 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Auth::routes(['register' => false, 'reset' => false]);
+
+Route::group(['middleware' => 'auth'], function () {
+  Route::get('/home', 'HomeController@index')->name('home');
+
+  Route::get('produtos', ['as' => 'produtos.index', 'uses' => 'ProdutosController@index']);
+
+  Route::get('produtos/create', ['as' => 'produtos.create', 'uses' => 'ProdutosController@create']);
+
+  Route::post('produtos/store', ['as' => 'produtos.store', 'uses' => 'ProdutosController@store']);
+
+  Route::get('produtos/edit/{id}', ['as' => 'produtos.edit', 'uses' => 'ProdutosController@edit']);
+
+  Route::post('produtos/update/{id}', ['as' => 'produtos.update', 'uses' => 'ProdutosController@update']);
+
+  Route::delete('produtos/destroy/{id}', ['as' => 'produtos.destroy', 'uses' => 'ProdutosController@destroy']);
+
+
+});
