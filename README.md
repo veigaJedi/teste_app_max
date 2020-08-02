@@ -11,10 +11,13 @@ composer install
 renomear .env.example para .env
 
 Criar Base de dados app_max
+
 php artisan migrate
+
 php artisan db:seed
 
 login: teste@gmail.com
+
 senha: 123456
 
 Rotas da api
