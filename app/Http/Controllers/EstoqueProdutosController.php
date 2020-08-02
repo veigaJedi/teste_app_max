@@ -45,6 +45,7 @@ class EstoqueProdutosController extends Controller
        $estoque->quantidade  = $request->quantidade;
        $estoque->valor_un    = $valor;
        $estoque->valor_total = $valorTotal;
+       $estoque->tipo        = "sistema";
        $estoque->save();
 
        return redirect()->route('adicionar-produto.create')->withStatus(__('Cadastrado com sucesso.'));
@@ -76,6 +77,7 @@ class EstoqueProdutosController extends Controller
        $baixaProduto->id_produto  = $request->produto;
        $baixaProduto->cliente     = $request->cliente;
        $baixaProduto->quantidade  = $request->quantidade;
+       $baixaProduto->tipo        = "sistema";
        $baixaProduto->save();
 
        return redirect()->route('baixa-produto')->withStatus(__('Baixa solicitada com sucesso'));

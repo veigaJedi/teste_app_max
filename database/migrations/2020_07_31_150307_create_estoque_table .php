@@ -19,6 +19,7 @@ class CreateEstoqueTable extends Migration
             $table->integer('quantidade');
             $table->decimal('valor_un', 24,2)->default(0);
             $table->decimal('valor_total', 24,2)->default(0);
+            $table->string('tipo', 255);
             $table->timestamps();
         });
         Schema::table('estoque', function($table) {

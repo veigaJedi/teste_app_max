@@ -35,6 +35,11 @@
                      @guest
                      @else
                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/home') }}">
+                        {{ __('Avisos') }}
+                        </a>
+                     </li>
+                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/produtos') }}">
                         {{ __('Produtos') }}
                         </a>
@@ -63,7 +68,7 @@
                            {{ __('Adicionados ao Estoque') }}
                            </a>
                            <a class="dropdown-item" href="{{ route('rel-produtos-baixa')}}">
-                           {{ __('Removidos do Estoque') }}
+                           {{ __('Baixa do Estoque') }}
                            </a>
                         </div>
                      </li>

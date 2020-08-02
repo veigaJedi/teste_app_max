@@ -18,6 +18,7 @@ class CreateBaixaEstoqueTable extends Migration
             $table->integer('id_produto')->unsigned();
             $table->string('cliente',255);
             $table->integer('quantidade');
+            $table->string('tipo', 255);
             $table->timestamps();
         });
         Schema::table('baixa_estoque', function($table) {

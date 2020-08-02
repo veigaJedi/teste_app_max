@@ -1,16 +1,18 @@
 Bem vindo ao estoque de produtos app max
 
 requerimentos
-  PHP 7.4.3 - 
+  PHP 7.4.3 
 
 
 Rodar comandos
 
 composer install
 
+Criar Base de dados app_max
+
 php artisan migrate
 
-php artisan migrate:refresh --seed
+php artisan db:seed
 
 login: teste@gmail.com.br
 senha: 123456

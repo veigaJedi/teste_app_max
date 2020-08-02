@@ -24,6 +24,7 @@ class EstoqueController extends Controller
       $estoque->quantidade  = $request->quantidade;
       $estoque->valor_un    = $request->valor_un;
       $estoque->valor_total = $valorTotal;
+      $estoque->tipo        = "api";
       $estoque->save();
 
       return response()->json([
@@ -51,6 +52,7 @@ class EstoqueController extends Controller
       $baixaProduto->id_produto  = $request->id_produto;
       $baixaProduto->cliente     = $request->cliente;
       $baixaProduto->quantidade  = $request->quantidade;
+      $baixaProduto->tipo        = "api";
       $baixaProduto->save();
 
       return response()->json([

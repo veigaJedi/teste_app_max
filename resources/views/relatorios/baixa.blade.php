@@ -39,6 +39,7 @@
                      <thead class="">
                         <th>Nome</th>
                         <th>Quantidade</th>
+                        <th>Tipo</th>
                         <th>Inserido</th>
                      </thead>
                      <tbody>
@@ -46,6 +47,7 @@
                         <tr>
                            <td>{{ $value->produtos->nome }}</td>
                            <td>{{ $value->quantidade }}</td>
+                           <td>{{ $value->tipo }}</td>
                            <td>{{ date('d/m/Y') }}</td>
                         </tr>
                         @endforeach
