@@ -43,5 +43,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('baixar-produtos', ['as' => 'baixar-produtos', 'uses' => 'EstoqueProdutosController@baixarProdutos']);
 
   Route::get('rel-produtos-adicionados', ['as' => 'rel-produtos-adicionados', 'uses' => 'RelatorioProdutosController@produtosAdicionados']);
+  Route::get('rel-produtos-baixa', ['as' => 'rel-produtos-baixa', 'uses' => 'RelatorioProdutosController@baixaProdutos']);
+
+  Route::post('rel-busca-adicionados', ['as' => 'rel-busca-adicionados', 'uses' => 'RelatorioProdutosController@buscarProdutosAdicionados']);
 
 });

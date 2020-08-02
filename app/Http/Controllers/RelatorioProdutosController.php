@@ -7,6 +7,7 @@ use App\Estoque;
 use App\Produtos;
 use App\BaixarProdutos;
 use DB;
+use Carbon\Carbon;
 
 class RelatorioProdutosController extends Controller
 {
@@ -23,16 +24,35 @@ class RelatorioProdutosController extends Controller
 
      public function produtosAdicionados()
      {
-       $estoque = Estoque::select('produtos.nome',
-               DB::raw('SUM(estoque.quantidade) as quantidade_total'))
-             ->leftJoin('produtos', 'produtos.id', '=', 'estoque.id_produto')
-             ->WhereDate('estoque.created_at','=',date('Y-m-d'))
-             ->groupBy('estoque.id_produto','produtos.nome')
-             ->orderBy('quantidade_total','DESC')
-             ->get();
 
-       return view('relatorios.adicionados',['estoque' => $estoque]);
+       $dtNow = date('y-m-d');
+       $relatorio = new Estoque();
+       $result = $relatorio->relatorioProdutosAdicionados($dtNow);
+
+       return view('relatorios.adicionados',['relatorio' => $result]);
+
      }
 
+     public function buscarProdutosAdicionados(Request $request)
+     {
+
+       $dtNow = Carbon::createFromFormat('d/m/Y', $request->dt_busca);
+       $relatorio = new Estoque();
+       $result = $relatorio->relatorioProdutosAdicionados($dtNow);
+
+       return view('relatorios.busca',['relatorio' => $result, 'dataAtual' => $request->dt_busca]);
+
+     }
+
+     public function baixaProdutos()
+     {
+
+       $dtNow = date('y-m-d');
+       $relatorio = new Estoque();
+       $result = $relatorio->relatorioProdutosAdicionados($dtNow);
+
+       return view('relatorios.adicionados',['relatorio' => $result]);
+
+     }
 
 }

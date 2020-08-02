@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Estoque extends Model
 {
@@ -14,5 +15,18 @@ class Estoque extends Model
 	{
 		return $this->belongsTo('App\Produtos', 'id_produto', 'id');
 	}
+
+  public function relatorioProdutosAdicionados($dtNow)
+  {
+    $estoque = Estoque::select('produtos.nome',
+            DB::raw('SUM(estoque.quantidade) as quantidade_total'))
+          ->leftJoin('produtos', 'produtos.id', '=', 'estoque.id_produto')
+          ->WhereDate('estoque.created_at','=', $dtNow)
+          ->groupBy('estoque.id_produto','produtos.nome')
+          ->orderBy('quantidade_total','DESC')
+          ->paginate(10);
+
+    return  $estoque;
+  }
 
 }

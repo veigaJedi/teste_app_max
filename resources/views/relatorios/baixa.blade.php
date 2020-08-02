@@ -2,9 +2,9 @@
 @section('content')
 <div class="container">
    <div class="row justify-content-center">
-      <div class="col-md-8">
+      <div class="col-md-12">
          <div class="card">
-            <div class="card-header">{{ __('Baixar Produto no Estoque') }}</div>
+            <div class="card-header">{{ __('Relatório de produtos movimentados por dia - Saída ') }}{{ date('d/m/Y') }}</div>
             <div class="card-body">
                @if (session('status'))
                <div class="alert alert-success" role="alert">
@@ -13,54 +13,46 @@
                @endif
             </div>
             <div class="card-body">
-               <form method="POST" action="{{ route('baixar-produtos') }}">
-                  @csrf
-                  <div class="form-group row">
-                     <label for="nome" class="col-md-4 col-form-label text-md-right">{{ __('Produto') }}</label>
-                     <div class="col-md-6">
-                       <select  name="produto" class="form-control{{ $errors->has('produto') ? ' is-invalid' : '' }}" required>
-                         <option value="">Selecione o produto</option>
-                         @foreach($produtos as $value)
-                            <option value="{{ $value->id }}">{{ $value->nome }}</option>
-                          @endforeach
-                       </select>
-                        @if ($errors->has('nome'))
-                        <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('nome') }}</strong>
-                        </span>
-                        @endif
-                     </div>
-                  </div>
-                  <div class="form-group row">
-                     <label for="cliente" class="col-md-4 col-form-label text-md-right">{{ __('Cliente') }}</label>
-                     <div class="col-md-6">
-                        <input id="cliente" type="text" class="form-control{{ $errors->has('cliente') ? ' is-invalid' : '' }}" name="cliente" value="{{ old('cliente') }}" required autofocus>
-                        @if ($errors->has('cliente'))
-                        <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('cliente') }}</strong>
-                        </span>
-                        @endif
-                     </div>
-                  </div>
-                  <div class="form-group row">
-                     <label for="quantidade" class="col-md-4 col-form-label text-md-right">{{ __('Quantidade') }}</label>
-                     <div class="col-md-6">
-                        <input id="quantidade" type="text" class="form-control{{ $errors->has('quantidade') ? ' is-invalid' : '' }}" name="quantidade" value="{{ old('quantidade') }}" required autofocus>
-                        @if ($errors->has('quantidade'))
-                        <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('quantidade') }}</strong>
-                        </span>
-                        @endif
-                     </div>
-                  </div>
-                  <div class="form-group row mb-0">
-                     <div class="col-md-6 offset-md-4">
-                        <button type="submit" class="btn btn-primary">
-                        {{ __('Cadastrar') }}
-                        </button>
-                     </div>
-                  </div>
+              <form method="POST" action="{{ route('rel-busca-adicionados') }}">
+                 @csrf
+                 <div class="form-group row">
+                    <label for="dt_busca" class="col-md-4 col-form-label text-md-right">{{ __('Filtrar por data') }}</label>
+                    <div class="col-md-2">
+                       <input id="dt_busca" type="text" class="form-control{{ $errors->has('dt_busca') ? ' is-invalid' : '' }}" name="dt_busca" value="{{ old('dt_busca') }}" required autofocus>
+                       @if ($errors->has('dt_busca'))
+                       <span class="invalid-feedback" role="alert">
+                       <strong>{{ $errors->first('dt_busca') }}</strong>
+                       </span>
+                       @endif
+                    </div>
+                    <div class="col-md-2">
+                       <button type="submit" class="btn btn-primary">
+                       {{ __('Filtrar') }}
+                       </button>
+                    </div>
+                 </div>
                </form>
+            </div>
+            <div class="card-body">
+               <div class="table-responsive">
+                  <table class="table table-hover">
+                     <thead class="">
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                        <th>Inserido</th>
+                     </thead>
+                     <tbody>
+                        @foreach($relatorio as $value)
+                        <tr>
+                           <td>{{ $value->nome }}</td>
+                           <td>{{ $value->quantidade_total }}</td>
+                           <td>{{ date('d/m/Y') }}</td>
+                        </tr>
+                        @endforeach
+                     </tbody>
+                  </table>
+                  {{ $relatorio->links() }}
+               </div>
             </div>
          </div>
       </div>
