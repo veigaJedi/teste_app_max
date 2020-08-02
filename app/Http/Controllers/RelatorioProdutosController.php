@@ -48,10 +48,22 @@ class RelatorioProdutosController extends Controller
      {
 
        $dtNow = date('y-m-d');
-       $relatorio = new Estoque();
-       $result = $relatorio->relatorioProdutosAdicionados($dtNow);
+       $baixas = BaixarProdutos::with('produtos.baixas')
+        ->WhereDate('created_at','=', $dtNow)
+        ->paginate(10);
 
-       return view('relatorios.adicionados',['relatorio' => $result]);
+       return view('relatorios.baixa',['relatorio' => $baixas ]);
+
+     }
+
+     public function buscaBaixaProdutos(Request $request)
+     {
+
+       $dtNow = Carbon::createFromFormat('d/m/Y', $request->dt_busca);
+       $baixas = BaixarProdutos::with('produtos.baixas')
+        ->WhereDate('created_at','=', $dtNow)
+        ->paginate(10);
+       return view('relatorios.baixaBusca',['relatorio' => $baixas, 'dataAtual' => $request->dt_busca ]);
 
      }
 

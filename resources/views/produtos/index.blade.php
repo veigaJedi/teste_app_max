@@ -24,8 +24,6 @@
                         <th>Codigo</th>
                         <th>SKU</th>
                         <th>Nome</th>
-                        <th>Quantidade</th>
-                        <th>Valor</th>
                         <th>Status</th>
                         <th>Dt. Criação</th>
                         <th>Dt. Atualização</th>
@@ -37,8 +35,6 @@
                         <tr>
                            <td>{{ $value->id }}</td>
                            <td>{{ $value->sku }}</td>
-                           <td>{{ $value->nome }}</td>
-                           <td>{{ $value->status }}</td>
                            <td>{{ $value->nome }}</td>
                            <td>{{ $value->status }}</td>
                            <td>{{ $value->created_at->format('d/m/Y') }}</td>

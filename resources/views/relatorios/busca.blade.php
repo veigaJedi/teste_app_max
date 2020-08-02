@@ -46,7 +46,7 @@
                         <tr>
                            <td>{{ $value->nome }}</td>
                            <td>{{ $value->quantidade_total }}</td>
-                           <td>{{ date('d/m/Y') }}</td>
+                           <td>{{ $dataAtual }}</td>
                         </tr>
                         @endforeach
                      </tbody>

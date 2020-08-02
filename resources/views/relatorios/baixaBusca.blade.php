@@ -4,7 +4,7 @@
    <div class="row justify-content-center">
       <div class="col-md-12">
          <div class="card">
-            <div class="card-header">{{ __('Relatório de produtos movimentados por dia - Saída ') }}{{ date('d/m/Y') }}</div>
+            <div class="card-header">{{ __('Relatório de produtos movimentados por dia - Saida ') }}{{ $dataAtual }}</div>
             <div class="card-body">
                @if (session('status'))
                <div class="alert alert-success" role="alert">
@@ -13,7 +13,7 @@
                @endif
             </div>
             <div class="card-body">
-              <form method="POST" action="{{ route('rel-busca-baixa') }}">
+              <form method="POST" action="{{ route('rel-busca-adicionados') }}">
                  @csrf
                  <div class="form-group row">
                     <label for="dt_busca" class="col-md-4 col-form-label text-md-right">{{ __('Filtrar por data') }}</label>
@@ -39,6 +39,7 @@
                      <thead class="">
                         <th>Nome</th>
                         <th>Quantidade</th>
+                        <th>Cliente</th>
                         <th>Inserido</th>
                      </thead>
                      <tbody>
@@ -46,7 +47,8 @@
                         <tr>
                            <td>{{ $value->produtos->nome }}</td>
                            <td>{{ $value->quantidade }}</td>
-                           <td>{{ date('d/m/Y') }}</td>
+                           <td>{{ $value->cliente }}</td>
+                           <td>{{ $dataAtual }}</td>
                         </tr>
                         @endforeach
                      </tbody>

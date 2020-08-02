@@ -62,7 +62,7 @@
                            <a class="dropdown-item" href="{{ route('rel-produtos-adicionados')}}">
                            {{ __('Adicionados ao Estoque') }}
                            </a>
-                           <a class="dropdown-item" href="{{ route('baixa-produto')}}">
+                           <a class="dropdown-item" href="{{ route('rel-produtos-baixa')}}">
                            {{ __('Removidos do Estoque') }}
                            </a>
                         </div>
