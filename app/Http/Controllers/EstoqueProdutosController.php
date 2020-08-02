@@ -61,14 +61,25 @@ class EstoqueProdutosController extends Controller
      {
        $produtoCountQuant = Estoque::select(DB::raw('SUM(quantidade) as quantidade_total'))
          ->where('id_produto','=',$request->produto)
-         ->groupBy('id_produto','quantidade')
+         ->groupBy('id_produto')
          ->first();
 
        if(!$produtoCountQuant){
-         return redirect()->route('baixa-produto')->withStatus(__('Produto nao disponivel no estoque'));
+         return redirect()->route('baixa-produto')->withStatus(__('Produto não disponivel no estoque'));
        }
 
-       if($request->quantidade > $produtoCountQuant->quantidade_total)
+       $produtoCountBaixas = BaixarProdutos::select(DB::raw('SUM(quantidade) as quantidade_total'))
+         ->where('id_produto','=',$request->produto)
+         ->groupBy('id_produto')
+         ->first();
+
+       if($produtoCountBaixas){
+         $quantidadeTotal = $produtoCountQuant->quantidade_total - $produtoCountBaixas->quantidade_total;
+       }else{
+         $quantidadeTotal = $produtoCountQuant->quantidade_total;
+       }
+
+       if($request->quantidade > $quantidadeTotal)
        {
          return redirect()->route('baixa-produto')->withStatus(__('Quantidade solicidade maior que disponivel no estoque.'));
        }
