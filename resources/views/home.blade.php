@@ -22,14 +22,16 @@
                               <th>Quantidade</th>
                            </thead>
                            <tbody>
-                              @foreach($result as $value)
-                              @if($value['quant_total'] < 100)
-                                <tr>
-                                   <td>{{ $value['nome_prod'] }}</td>
-                                   <td>{{ $value['quant_total'] }}</td>
-                                </tr>
+                             @if($result)
+                                @foreach($result as $value)
+                                  @if($value['quant_total'] < 100)
+                                    <tr>
+                                       <td>{{ $value['nome_prod'] }}</td>
+                                       <td>{{ $value['quant_total'] }}</td>
+                                    </tr>
+                                  @endif
+                                @endforeach
                               @endif
-                              @endforeach
                            </tbody>
                         </table>
                      </div>
