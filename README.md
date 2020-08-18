@@ -1,7 +1,7 @@
 Bem vindo ao estoque de produtos
 
 requerimentos
-  PHP 7.4.3
+  PHP 7.4.3 -  Mysql
 
 
 Rodar comandos
@@ -10,7 +10,7 @@ composer install
 
 renomear .env.example para .env
 
-Criar Base de dados app_max
+Criar Base de dados gerenciador_estoque
 
 php artisan migrate
 
