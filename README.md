@@ -1,4 +1,4 @@
-Bem vindo ao estoque de produtos app max
+Bem vindo ao estoque de produtos
 
 requerimentos
   PHP 7.4.3
