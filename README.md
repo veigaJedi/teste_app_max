@@ -10,7 +10,7 @@ composer install
 
 renomear .env.example para .env
 
-Criar Base de dados gerenciador_estoque
+Criar Base de dados app_max
 
 php artisan migrate
 
